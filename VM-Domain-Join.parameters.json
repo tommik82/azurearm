@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "existingVNETName": {
+      "value": "server-vnet"
+    },
+    "existingSubnetName": {
+      "value": "servers"
+    },
+    "existingVNETRG":{
+        "value": "server-rg"
+    },
+    "vmSize": {
+        "value": "Standard_D2_V3"
+      },
+      "dnsLabelPrefix": {
+        "value": "IISVM01"
+      },
+    "domainToJoin": {
+      "value": "devcloudops.local"
+    },
+    "ouPath": {
+      "value": "OU=Servers; DC=devcloudops; DC=local"
+    },
+    "domainUsername": {
+      "value": "onder.deger@devcloudops.local"
+    },
+    "domainPassword": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/fe688881-14d5-4b7a-985a-10dbcaaf3097/resourceGroups/Server-RG/providers/Microsoft.KeyVault/vaults/devcloudopskv"
+            },
+            "secretName": "domainpassword"
+          }
+      },
+    "domainJoinOptions": {
+      "value": 3
+    },
+    "vmAdminUsername": {
+      "value": "adminonder"
+    },
+    "vmAdminPassword": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/fe688881-14d5-4b7a-985a-10dbcaaf3097/resourceGroups/Server-RG/providers/Microsoft.KeyVault/vaults/devcloudopskv"
+            },
+            "secretName": "localadmin"
+          }
+      }
+  }
+}
